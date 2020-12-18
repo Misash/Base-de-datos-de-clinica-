@@ -1,0 +1,13 @@
+12345678
+Brigham Caceres
+1
+01-20-00-9632
+0
+2020/12/19
+1
+Paracetamol
+5
+tomar cada 5 horas
+1
+rayos x
+end
