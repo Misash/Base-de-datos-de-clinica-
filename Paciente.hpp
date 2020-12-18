@@ -14,6 +14,7 @@ class Paciente : public Persona
     private:
         float Talla,Peso;
         std::string sintomas; 
+        
         void cuenta();
         void verPerfil();
         void solicitarCita();

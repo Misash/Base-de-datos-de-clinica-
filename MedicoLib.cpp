@@ -6,44 +6,9 @@
 #include <conio.h>
 #include <ctime>
 #include <cstring>
-#include "Persona.cpp"
+#include "MedicoLib.hpp"
 
 using namespace std;
-
-class Medicos : public Persona{
-
-    public:
-    
-        Medicos();
-        ~Medicos();
-
-        bool cargar_datos_medico(string, string, int);
-        void menu_principal();
-
-    private:
-        string Horario, Consultorio, Codigo;
-        bool Activo;
-        int  nroOrden, AreaMedica;
-
-        string ficheroCitas = "CITAS/Citas_";
-
-        void informacion_medico();
-        void modificar();
-        bool modificar_base_datos_personales(char[], string, int, int);
-        bool buscar_citas();
-        void visualizar_citas();
-        void busqueda_dni(string);
-        bool cargar_datos_paciente(string, string&, string&, string&, string&, string&, string&, string&, int&, float&, float&);
-        void datos_paciente(string);
-        void estado_atencion(string, bool&);
-        void obtener_registros(string, string, string, int, float, float);
-        void generar_receta_medica(string, string, string, int, float, float);
-        void modificar_db_post(string, int , string);
-        void modificar_post_atencion(string);
-        void fecha();
-        void hora();
-        void continuar();
-};
 
 Medicos::Medicos(){
     cout << "\nMedico creado\n";
@@ -1423,12 +1388,9 @@ void Medicos::modificar_post_atencion(string DNIPaciente){
             while(!db_post_atencion.eof()){
 
                 getline(db_post_atencion, DNITemp);
-                
-
                 if(DNITemp == DNIPaciente){
 
                     db_post_atencion >> habilitado >> reqExamen >> codEspecialista >> reqCita >> reqHospitalizacion;
-                    
                     
                     if (habilitado){
                         

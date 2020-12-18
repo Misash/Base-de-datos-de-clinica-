@@ -1,4 +1,4 @@
-# include "Admin_empleados.h"
+# include "Empleados_Admin.h"
 
 //Limpiar pantalla
 #ifdef _WIN32
@@ -21,9 +21,9 @@ void error10(){
     cout<<"clientes.txt, si el archivo tiene otro nombre ren\242mbrelo al ya mencionado\n\n";
 }
 
-void llenardatosempleado(){
+void Empleado::llenardatosempleado(){
     string auxCodigo;
     cout<<"Ingrese codigo de empleado";cin>>codigoEmpleado;
-    Activo="Yes"
+    Activo="1";
     pausa10();
 }

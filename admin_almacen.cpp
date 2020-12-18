@@ -364,7 +364,7 @@ void admin_inventario::Vendermedicamentos(){
     cout<<"8.Medicina de Nefrologia"<<endl;
     cout<<"9.Medicina de Reumatologia"<<endl;
     cout<<"10.Medicina de General"<<endl;
-    cout<<"0.Finalizar compra"<<endl;
+    cout<<"0.Finalizar venta"<<endl;
     do{
         cout<<"Medicamento: ";cin>>aux;
         cout<<"Cantidad: ";cin>>aux2;
@@ -425,7 +425,7 @@ void admin_inventario::Vendermedicamentos(){
 
     }while(aux!=0);
     precio_temporal;
-    cout<<"Costo a pagar: "<<precio_temporal;
+    cout<<"Precio de Venta: "<<precio_temporal;
 
 pausa1();
 }

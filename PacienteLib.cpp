@@ -3,6 +3,7 @@
 #include <string.h>
 #include <conio.h> //getch()
 #include <ctime>//citas
+#include <vector>
 #include "myVector.cpp"
 #include <iomanip>//formato tablas 
 #include<stdlib.h> //time()
@@ -225,6 +226,9 @@ void Paciente::solicitarCita()
 }
 
 
+
+
+
 void Paciente::generadorCita(string NombreArchivo,string areaMedica)
 {
 
@@ -249,22 +253,25 @@ void Paciente::generadorCita(string NombreArchivo,string areaMedica)
 	while(!medicos.eof())
 	{
 		getline(medicos,_codigo);
-		getline(medicos,activo);
-		getline(medicos,_nombre);
-		getline(medicos,_apellido);
-		getline(medicos,aux);
-		getline(medicos,_areaMedica); 
-		getline(medicos,_horario);
-		getline(medicos,_consultorio);
-		for(int i=0;i<5;++i) getline(medicos,aux); 
-	
-		if((activo=="true" || activo=="1") && _areaMedica==areaMedica)
-		{
-			Nombres.push_back(_nombre);
-			Apellidoss.push_back(_apellido);
-			codigos.push_back(_codigo);
-			horarios.push_back(_horario); 
-			consultorios.push_back(_consultorio);
+		if(_codigo.length() == 13){
+
+			getline(medicos,activo);
+			getline(medicos,_nombre);
+			getline(medicos,_apellido);
+			getline(medicos,aux);
+			getline(medicos,_areaMedica); 
+			getline(medicos,_horario);
+			getline(medicos,_consultorio);
+			for(int i=0;i<5;++i) getline(medicos,aux); 
+		
+			if((activo=="true" || activo=="1") && _areaMedica==areaMedica)
+			{
+				Nombres.push_back(_nombre);
+				Apellidoss.push_back(_apellido);
+				codigos.push_back(_codigo);
+				horarios.push_back(_horario); 
+				consultorios.push_back(_consultorio);
+			}
 		}
 		
 	}
@@ -277,7 +284,6 @@ void Paciente::generadorCita(string NombreArchivo,string areaMedica)
 	
 		do
 		{
-		
 			system(CLEAR);
 			now += 86400; // mañana
 			struct tm nowlocal;
@@ -336,12 +342,7 @@ void Paciente::generadorCita(string NombreArchivo,string areaMedica)
 					consultorio = consultorios.operator[](i);
 					maxCitas =_maxCitas;
 					hora = (numeroCitas!=0)? stoi(last_hora)+30: stoi(last_hora);
-					//PRUEBAS
-					/*
-					cout<<"\n---resultados---\n";
-					cout<<"Citas posibles= "<<menorCitas<<" maximoCitas= "<<maxCitas<<endl;
-					cout<<"hora= "<<hora<<" codigo= "<<codigoMedico<<endl;
-					*/
+			
 				}
 			}
 		}while(menorCitas==0);
@@ -550,7 +551,7 @@ void Paciente::verRecetaMedica()
 	system(CLEAR);
 	fstream receta("MEDICO//receta.txt");
 	string aux,examen,fecha,codigoMedico,Nombre_Apellidos,areaMedica,_fecha,peso,talla,edad;
-	int nroMedicamentos,op,opcion;
+	int nroMedicamentos,nroExamenes,op,opcion;
 
 
 	fecha="0000/00/00";
@@ -582,14 +583,17 @@ void Paciente::verRecetaMedica()
                     getline(receta,aux);comentarios.push_back(aux);
                     nroMedicamentos--;
                 }
-					getline(receta,aux);
-                    getline(receta,examen);
-                do
-                {
-                    examenes.push_back(examen);
-                    getline(receta,examen);
 
-                }while(examen!="end");
+				receta>>nroExamenes;receta.ignore();
+
+				while(nroExamenes>0)//numero de Medicamentos
+                {
+                    getline(receta,examen);
+					examenes.push_back(examen);
+                    nroExamenes--;
+                }
+
+				getline(receta,aux);//end
 
 
 				if(fecha == _fecha  )
@@ -672,14 +676,14 @@ void Paciente::verPostAtencion()
 	cout << "\t\t\t\t\t|     ESTADO   DE  POST-ATENCION       |\n";
 	cout << "\t\t\t\t\t|______________________________________|\n";
 
-	if(habilitado == "true")
+	if(habilitado == "1")
 	{
 		cout<<"\n\t\t__________________________________________________\n";
 		cout<<"\n\t\tRequiere Examenes:\t\t"<<SI_NO(reqExamen);
 		cout<<"\n\t\tDerivacion a otro especialista:\t"<<NombreAreaMedica(codAreaMedica);
 		cout<<"\n\t\tRequiere otras citas:\t\t"<<SI_NO(reqCita);
 		cout<<"\n\t\t__________________________________________________\n";
-		cout<<"\n\t\tRequiere Hospitalizacion:\t"<<SI_NO(reqCita);
+		cout<<"\n\t\tRequiere Hospitalizacion:\t"<<SI_NO(reqHospitalizacion);
 		cout<<"\n\t\t__________________________________________________\n\n\n";
 
 	}
@@ -700,7 +704,7 @@ void Paciente::verPostAtencion()
 
 string SI_NO(string p)
 {
-	return(p =="true")? "SI":"NO";
+	return(p =="1")? "SI":"NO";
 }
 
 void modificarSintomas(string DNI,string sintomas)
