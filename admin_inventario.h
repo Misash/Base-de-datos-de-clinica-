@@ -18,7 +18,7 @@ using namespace std;
 
 class admin_inventario{
 	private:
-	    int medicina[10][2];
+	    int medicina[10][3];
 		// 0 MedicinaCardio;
 		// 1 MedicinaNeumo;
 		// 2 MedicinaOncolo;
@@ -35,6 +35,9 @@ class admin_inventario{
 		void PedidoMedicamentos();
 	   	void RevisionStock();
 	   	void EliminarStock();
-	    	void cargarInventario();
-	    	void SalvarInventario();
+        	void cargarInventario();
+        	void SalvarInventario();
+        	void AlarmadePedido();
+        	void SetMinimos();
+        	void Vendermedicamentos();
 };

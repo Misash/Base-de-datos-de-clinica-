@@ -23,15 +23,19 @@ void error1(){
 
 
 void admin_inventario::MenuInventarioM(){
+	Asignarprecios();
 	int OpcionInv;
     do
     {
+        SetMinimos();
+        AlarmadePedido();
         cout<<"\t\t\t\t***A.S.INVENTARIO***\t\t\t\t\n\n";
         cout<<"1. Asignar precios de medicina.\n\n";
         cout<<"2. Pedido de medicamentos.\n\n";
         cout<<"3. Revision de stock.\n\n";
         cout<<"4. Eliminar stock.\n\n";
-        cout<<"5. Volver atras\n\n";
+        cout<<"5. vender medicamentos\n\n";
+        cout<<"6. Volver atras\n\n";
         cout<<"Opci\242n: ";
         cin>>OpcionInv;
         system(CLEAR);
@@ -58,10 +62,15 @@ void admin_inventario::MenuInventarioM(){
             break;
 
         case 5:
+            Vendermedicamentos();
+            break;
+
+        case 6:
+            SalvarInventario();
             break;
         }
     }
-    while(OpcionInv!=5);
+    while(OpcionInv!=6);
 }
 
 void admin_inventario::cargarInventario(){
@@ -292,6 +301,45 @@ void admin_inventario::RevisionStock(){
     pausa1();
 }
 
+void admin_inventario::SetMinimos(){
+    for(int i=0;i<10;i++){
+        medicina[i][2]=10;
+    }
+}
+
+void admin_inventario::AlarmadePedido(){
+    if(medicina[0][0]<medicina[0][2]){
+        cout<<"Se necesita un pedido de medicina de Cardio"<<endl;
+    }
+    if(medicina[1][0]<medicina[1][2]){
+        cout<<"Se necesita un pedido de medicina de Neumologia"<<endl;
+    }
+    if(medicina[2][0]<medicina[2][2]){
+        cout<<"Se necesita un pedido de medicina de Oncologia"<<endl;
+    }
+    if(medicina[3][0]<medicina[3][2]){
+        cout<<"Se necesita un pedido de medicina de Hematologia"<<endl;
+    }
+    if(medicina[4][0]<medicina[4][2]){
+        cout<<"Se necesita un pedido de medicina de Dermatologia"<<endl;
+    }
+    if(medicina[5][0]<medicina[5][2]){
+        cout<<"Se necesita un pedido de medicina de Oftalmologia"<<endl;
+    }
+    if(medicina[6][0]<medicina[6][2]){
+        cout<<"Se necesita un pedido de medicina de Urologia"<<endl;
+    }
+    if(medicina[7][0]<medicina[7][2]){
+        cout<<"Se necesita un pedido de medicina de Nefrologia"<<endl;
+    }
+    if(medicina[8][0]<medicina[8][2]){
+        cout<<"Se necesita un pedido de medicina de Reumatologia"<<endl;
+    }
+    if(medicina[9][0]<medicina[9][2]){
+        cout<<"Se necesita un pedido de medicina de General"<<endl;
+    }
+}
+
 void admin_inventario::EliminarStock(){
     for(int i=0; i<10; i++){
         medicina[i][0]=0;
@@ -301,3 +349,83 @@ void admin_inventario::EliminarStock(){
     RevisionStock();
     pausa1();
     }
+
+void admin_inventario::Vendermedicamentos(){
+    int aux,aux2,precio_temporal=0;
+    string confirmacion;
+    cout<<"Venta de medicamentos"<<endl;
+    cout<<"1.Medicina de Cardio"<<endl;
+    cout<<"2.Medicina de Neumologia"<<endl;
+    cout<<"3.Medicina de Oncologia"<<endl;
+    cout<<"4.Medicina de Hematologia"<<endl;
+    cout<<"5.Medicina de Dermatologia"<<endl;
+    cout<<"6.Medicina de Oftalmologia"<<endl;
+    cout<<"7.Medicina de Urologia"<<endl;
+    cout<<"8.Medicina de Nefrologia"<<endl;
+    cout<<"9.Medicina de Reumatologia"<<endl;
+    cout<<"10.Medicina de General"<<endl;
+    cout<<"0.Finalizar compra"<<endl;
+    do{
+        cout<<"Medicamento: ";cin>>aux;
+        cout<<"Cantidad: ";cin>>aux2;
+        switch(aux){
+            case 1:
+                precio_temporal+=(medicina[0][1])*aux2;
+                medicina[0][0]=medicina[0][0]-aux2;
+                cout<<"Precio:"<<precio_temporal<<endl;
+                break;
+            case 2:
+                precio_temporal+=(medicina[1][1])*aux2;
+                medicina[1][0]=medicina[1][0]-aux2;
+                cout<<"Precio:"<<precio_temporal<<endl;
+                break;
+            case 3:
+                precio_temporal+=(medicina[2][1])*aux2;
+                medicina[2][0]=medicina[2][0]-aux2;
+                cout<<"Precio:"<<precio_temporal<<endl;
+                break;
+            case 4:
+                precio_temporal+=(medicina[3][1])*aux2;
+                medicina[3][0]=medicina[3][0]-aux2;
+                cout<<"Precio:"<<precio_temporal<<endl;
+                break;
+            case 5:
+                precio_temporal+=(medicina[4][1])*aux2;
+                medicina[4][0]=medicina[4][0]-aux2;
+                cout<<"Precio:"<<precio_temporal<<endl;
+                break;
+            case 6:
+                precio_temporal+=(medicina[5][1])*aux2;
+                medicina[5][0]=medicina[5][0]-aux2;
+                cout<<"Precio:"<<precio_temporal<<endl;
+                break;
+            case 7:
+                precio_temporal+=(medicina[6][1])*aux2;
+                medicina[6][0]=medicina[6][0]-aux2;
+                cout<<"Precio:"<<precio_temporal<<endl;
+                break;
+            case 8:
+                precio_temporal+=(medicina[7][1])*aux2;
+                medicina[7][0]=medicina[7][0]-aux2;
+                cout<<"Precio:"<<precio_temporal<<endl;
+                break;
+            case 9:
+                precio_temporal+=(medicina[8][1])*aux2;
+                medicina[8][0]=medicina[8][0]-aux2;
+                cout<<"Precio:"<<precio_temporal<<endl;
+                break;
+            case 10:
+                precio_temporal+=(medicina[9][1])*aux2;
+                medicina[9][0]=medicina[9][0]-aux2;
+                cout<<"Precio:"<<precio_temporal<<endl;
+                break;
+            case 0:
+                break;
+        }
+
+    }while(aux!=0);
+    precio_temporal;
+    cout<<"Costo a pagar: "<<precio_temporal;
+
+pausa1();
+}

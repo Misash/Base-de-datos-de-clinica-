@@ -1,10 +1,5 @@
 12345678
-81
-1.89
+87
+1.93
 Dolor en el pecho, presión en el pecho y fatiga
-30
-88888888
-78
-1.67
-Null
-70
+24

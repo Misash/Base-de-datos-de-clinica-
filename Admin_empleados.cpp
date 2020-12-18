@@ -56,7 +56,5 @@ void admin_empleados::IngresarMedicoscall(){
 
 void admin_empleados::VerHorarioDoctorescall(){
     med.VerHorarioDoctores();
-    med.ver_DatosPersonales();
     pausa12();
 }
-

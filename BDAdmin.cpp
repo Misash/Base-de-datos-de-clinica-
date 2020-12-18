@@ -27,7 +27,6 @@ using namespace std;
 class menuadministrador
 {
 admin_empleados emple;
-admin_pacientes paci;
 admin_inventario alma;
 
 public:
@@ -42,9 +41,8 @@ void menuadministrador::MenuPrincipal(){
         system("cls");
         cout<<"\t\t\t\t***A.S.EMPLEADOS***\t\t\t\t\n\n";
         cout<<"1. Empleados.\n\n";
-        cout<<"2. Pacientes\n\n";
-        cout<<"3. Farmacia\n\n";
-        cout<<"4. Cerrar el programa\n\n";
+        cout<<"2. Farmacia\n\n";
+        cout<<"3. Cerrar el programa\n\n";
         cout<<"Opci\242n: ";
         cin>>OpcionEmpl;
         system(CLEAR);
@@ -59,18 +57,14 @@ void menuadministrador::MenuPrincipal(){
             break;
 
         case 2:
-            paci.MenuPacientes();
-            break;
-
-        case 3:
             alma.cargarInventario();
             alma.MenuInventarioM();
             break;
 
-        case 4:
+        case 3:
             break;
         }
     }
-    while(OpcionEmpl!=4);
+    while(OpcionEmpl!=3);
     alma.SalvarInventario();
 }

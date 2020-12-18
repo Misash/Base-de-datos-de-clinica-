@@ -1423,9 +1423,12 @@ void Medicos::modificar_post_atencion(string DNIPaciente){
             while(!db_post_atencion.eof()){
 
                 getline(db_post_atencion, DNITemp);
+                
+
                 if(DNITemp == DNIPaciente){
 
                     db_post_atencion >> habilitado >> reqExamen >> codEspecialista >> reqCita >> reqHospitalizacion;
+                    
                     
                     if (habilitado){
                         
